@@ -1,6 +1,7 @@
 """Debt Collector - a simple tool to track money people owe you."""
 
 import json
+import math
 import os
 
 DATA_FILE = "debts.json"
@@ -45,6 +46,19 @@ def total_owed(debts):
     """How much money is still waiting to be collected."""
     return sum(balance(debt) for debt in debts)
 
+def ask_amount(prompt):
+    """Keep asking until the user types a number greater than zero."""
+    while True:
+        text = input(prompt)
+        try:
+            amount = float(text)
+        except ValueError:
+            print("Please enter a number, for example 100 or 49.50.")
+            continue
+        if not math.isfinite(amount) or amount <= 0:
+            print("The amount must be greater than zero.")
+            continue
+        return amount
 
 def show_debts(debts):
     """Print every debt."""
@@ -64,7 +78,7 @@ def main():
 
         if choice == "1":
             name = input("Name: ")
-            amount = float(input("Amount owed: "))
+            amount = ask_amount("Amount owed: ")
             add_debt(debts, name, amount)
             save_debts(debts)
             print("Saved.")
@@ -72,7 +86,7 @@ def main():
             show_debts(debts)
         elif choice == "3":
             name = input("Name: ")
-            amount = float(input("Payment amount: "))
+            amount = ask_amount("Payment amount: ")
             if record_payment(debts, name, amount):
                 save_debts(debts)
                 print("Payment recorded.")

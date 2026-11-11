@@ -1,4 +1,4 @@
-# Debt Collector (CLI)
+# Debt Collector (CLI) - Track Who Owes You
 
 A simple command-line tool to track money people owe you.
 You can add a debt, show everyone who owes you money, and record payments.
