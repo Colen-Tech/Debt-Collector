@@ -78,7 +78,7 @@ def main():
 
         if choice == "1":
             name = input("Name: ")
-            amount = float(input("Amount owed: "))
+            amount = ask_amount("Amount owed: ")
             add_debt(debts, name, amount)
             save_debts(debts)
             print("Saved.")
@@ -86,7 +86,7 @@ def main():
             show_debts(debts)
         elif choice == "3":
             name = input("Name: ")
-            amount = float(input("Payment amount: "))
+            amount = ask_amount("Payment amount: ")
             if record_payment(debts, name, amount):
                 save_debts(debts)
                 print("Payment recorded.")
